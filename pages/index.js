@@ -1,27 +1,27 @@
 import React from 'react';
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
-const Button = styled.button`
-  color: turquoise;
-  background-color: aqua;
+const Heading = styled.h1`
+  color: red;
 `
 
-const H1 = styled.h1`
-  color: red
+const Button = styled.button`
+  background-color: salmon;
+  color: green;
 `
 
 const Home = () => {
 
-  const click = () =>{
-    console.log('click')
-  }
+  
   return (
     <div>
-      <H1>This is lightgreen.</H1>
-      <Button 
-        onClick={()=> click()}
+      <Heading>
+        hola
+      </Heading>
+      <Button
+        onClick={()=> console.log('click me!')}
       >
-        Presiona me!
+        click
       </Button>
     </div>
   )
