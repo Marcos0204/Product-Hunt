@@ -1,10 +1,11 @@
 import React from 'react';
-import Link from 'next/link'
+import Link from 'next/link';
+import Header from '../Header/Header';
 
 const Layout = props => {
     return (
         <>
-            <h2>header</h2>
+            <Header/>
             <nav>
                 <Link href='/'> Inicio</Link>
                 <Link href='/nosotros'>Nosotros</Link>
