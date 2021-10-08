@@ -6,10 +6,10 @@ const Layout = props => {
     return (
         <>
             <Header/>
-            <nav>
+            {/* {<nav>
                 <Link href='/'> Inicio</Link>
                 <Link href='/nosotros'>Nosotros</Link>
-            </nav>
+            </nav>} */}
             <main>
                 {props.children}
             </main>
