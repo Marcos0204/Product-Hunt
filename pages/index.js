@@ -1,29 +1,15 @@
 import React from 'react';
-import styled from '@emotion/styled';
-
-const Heading = styled.h1`
-  color: red;
-`
-
-const Button = styled.button`
-  background-color: salmon;
-  color: green;
-`
+import Layout from '../components/Layout/Layout';
 
 const Home = () => {
 
   
   return (
-    <div>
-      <Heading>
-        hola
-      </Heading>
-      <Button
-        onClick={()=> console.log('click me!')}
-      >
-        click
-      </Button>
-    </div>
+    <>
+      <Layout>
+        <h2>inicio</h2>
+      </Layout>
+    </>
   )
 }
 
