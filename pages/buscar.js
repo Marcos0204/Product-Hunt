@@ -1,16 +1,16 @@
 import React from 'react';
 import Layout from '../components/Layout/Layout';
 
-const Nosotros = () => {
+const Searah = () => {
 
   
   return (
     <>
       <Layout>
-        <h2>nosotros</h2>
+        <h2>Buscar</h2>
       </Layout>
     </>
   )
 }
 
-export default Nosotros
+export default Searah
