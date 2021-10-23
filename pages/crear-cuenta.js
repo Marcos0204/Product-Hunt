@@ -1,14 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { css } from '@emotion/core';
 import Layout from '../components/Layout/Layout';
 import { Form, Field, InputSubmit,  Error } from '../components/ui/Form/Form';
+
+
+// validaciones
+import useValidation from '../hooks/useValidation';
+import validationCreateAcount from '../validation/ValidateCreateAcount'
+
+
+const initialState = {
+  name: '',
+  email: '',
+  password: ''
+}
 
 const CreateAccount = () => {
 
   const [ error, guardarError] = useState(false);
 
-  const { valores, errores, handleSubmit, handleChange, handleBlur } = useValidacion(STATE_INICIAL, validarCrearCuenta, crearCuenta);
+  const { values, errors, handleSubmit, handleChange, handleBlur } = useValidation(initialState, validationCreateAcount, crearCuenta);
 
-  const { nombre, email, password } = valores;
+  const { name, email, password } = values;
+
+
+  async function crearCuenta() {
+    // try {
+    //   await firebase.registrar(nombre, email, password);
+    //   Router.push('/');
+    // } catch (error) {
+    //   console.error('Hubo un error al crear el usuario ', error.message);
+    //   guardarError(error.message);
+    // }
+      console.log('funciono todo perfecto')
+  }
+
+
   
   return (
     <>
@@ -28,16 +55,16 @@ const CreateAccount = () => {
                   <label htmlFor="nombre">Nombre</label>
                   <input 
                       type="text"
-                      id="nombre"
+                      id="name"
                       placeholder="Tu Nombre"
-                      name="nombre"
-                      value={nombre}
+                      name="name"
+                      value={name}
                       onChange={handleChange}
                       onBlur={handleBlur}
                   />
               </Field>
 
-              {errores.nombre && <Error>{errores.nombre}</Error> }
+              {errors.name && <Error>{errors.name}</Error> }
   
               <Field>
                   <label htmlFor="email">Email</label>
@@ -51,7 +78,7 @@ const CreateAccount = () => {
                       onBlur={handleBlur}
                   />
               </Field>
-              {errores.email && <Error>{errores.email}</Error> }
+              {errors.email && <Error>{errors.email}</Error> }
   
               <Field>
                   <label htmlFor="password">Password</label>
@@ -65,7 +92,7 @@ const CreateAccount = () => {
                       onBlur={handleBlur}
                   />
               </Field>
-              {errores.password && <Error>{errores.password}</Error> }
+              {errors.password && <Error>{errors.password}</Error> }
 
               {error && <Error>{error} </Error>}
   

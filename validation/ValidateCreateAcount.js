@@ -1,4 +1,4 @@
-export default function validarCrearCuenta(values) {
+export default function ValidateCreateAcount(values) {
 
     let errors = {};
 
