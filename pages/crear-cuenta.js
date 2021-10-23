@@ -1,8 +1,14 @@
 import React from 'react';
 import Layout from '../components/Layout/Layout';
+import { Form, Field, InputSubmit,  Error } from '../components/ui/Form/Form';
 
 const CreateAccount = () => {
 
+  const [ error, guardarError] = useState(false);
+
+  const { valores, errores, handleSubmit, handleChange, handleBlur } = useValidacion(STATE_INICIAL, validarCrearCuenta, crearCuenta);
+
+  const { nombre, email, password } = valores;
   
   return (
     <>
@@ -14,11 +20,11 @@ const CreateAccount = () => {
               margin-top: 5rem;
             `}
           >Crear Cuenta</h1>
-          <Formulario
+          <Form
             onSubmit={handleSubmit}
             noValidate
           >
-              <Campo>
+              <Field>
                   <label htmlFor="nombre">Nombre</label>
                   <input 
                       type="text"
@@ -29,11 +35,11 @@ const CreateAccount = () => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                   />
-              </Campo>
+              </Field>
 
               {errores.nombre && <Error>{errores.nombre}</Error> }
   
-              <Campo>
+              <Field>
                   <label htmlFor="email">Email</label>
                   <input 
                       type="email"
@@ -44,10 +50,10 @@ const CreateAccount = () => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                   />
-              </Campo>
+              </Field>
               {errores.email && <Error>{errores.email}</Error> }
   
-              <Campo>
+              <Field>
                   <label htmlFor="password">Password</label>
                   <input 
                       type="password"
@@ -58,7 +64,7 @@ const CreateAccount = () => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                   />
-              </Campo>
+              </Field>
               {errores.password && <Error>{errores.password}</Error> }
 
               {error && <Error>{error} </Error>}
@@ -67,7 +73,7 @@ const CreateAccount = () => {
                 type="submit"
                 value="Crear Cuenta"
               />
-          </Formulario>
+          </Form>
         </>
       </Layout>
     </>
