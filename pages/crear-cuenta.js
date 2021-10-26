@@ -19,7 +19,7 @@ const initialState = {
 
 const CreateAcount = () => {
 
-    const [ error, guardarError] = useState(false);
+    const [ error, setError] = useState(false);
 
     const { values, errors, handleSubmit, handleChange, handleBlur } = useValidation(initialState, validationCreateAcount, crearCuenta);
 
@@ -27,9 +27,17 @@ const CreateAcount = () => {
     const router = useRouter()
 
     async function crearCuenta() {
-        const res = await Firebase.register(name, email, password);
-        console.log(res)
-        router.push('/');
+        try {
+          const res = await Firebase.register(name, email, password);
+          //console.log(res)
+          router.push('/');
+        } catch (error) {
+          setError(true)
+          setTimeout(() => {
+            setError(false)
+          }, 3000);
+          
+        }
     }
 
   
@@ -90,7 +98,7 @@ const CreateAcount = () => {
                 </Field>
                 {errors.password && <Error>{errors.password}</Error> }
   
-                {error && <Error>{error} </Error>}
+                {error && <Error>Oops!... Este usuario ya esta en uso</Error>}
     
                 <InputSubmit 
                   type="submit"

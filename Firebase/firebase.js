@@ -29,14 +29,13 @@ class appfire {
         const res = await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(auth.currentUser, {
             displayName: name,
-          }).then(() => {
-            // Profile updated!
-            // ...
-            console.log('Nombre actualizado')
-          }).catch((error) => {
-            // An error occurred
-            // ...
-          });
+           })//.then(() => {
+        //     // Profile updated!
+        //     // ...
+        //   }).catch((error) => {
+        //     // An error occurred
+        //     // ...
+        //   });
         return res
     }
     
