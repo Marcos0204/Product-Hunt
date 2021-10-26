@@ -1,43 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { css } from '@emotion/core';
 import Layout from '../components/Layout/Layout';
 import { Form, Field, InputSubmit,  Error } from '../components/ui/Form/Form';
 
+import firebaseApp from '../Firebase/Config';
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signInWithRedirect,
+    GoogleAuthProvider,
 
-// validaciones
-import useValidation from '../hooks/useValidation';
-import validationCreateAcount from '../validation/ValidateCreateAcount'
+} from 'firebase/auth';
 
+import Firebase from '../Firebase/firebase';
 
-const initialState = {
-  name: '',
-  email: '',
-  password: ''
-}
+const auth = getAuth(firebaseApp);
 
-const CreateAccount = () => {
+//const googleAuthProvider = new GoogleAuthProvider(); 
 
-  const [ error, guardarError] = useState(false);
+const CreateAcount = () => {
+    const [ iseRegister, SetIsRegister ] = useState(true)
+    const [ email, setEmail ] = useState('');
+    const [password, setPassword] = useState('')
+    const [ user, setUser ]= useState(null)
+    console.log(user)
 
-  const { values, errors, handleSubmit, handleChange, handleBlur } = useValidation(initialState, validationCreateAcount, crearCuenta);
+    async function submitHandler(e) {
+        e.preventDefault();
+        
+        const res = await Firebase.register(email, password);
+        setUser(res)
+        
+        //const email= e.target.email.value;
+        //const password = e.target.password.value;
+        // if(iseRegister){
+        //     const res = await createUserWithEmailAndPassword(auth, email, password);
+        //     setUser(res)
+        // } else {
+        //     const res = await signInWithEmailAndPassword(auth, email, password);
+        //     setUser(res)
+        // }
+        
+    }
 
-  const { name, email, password } = values;
-
-
-  async function crearCuenta() {
-    // try {
-    //   await firebase.registrar(nombre, email, password);
-    //   Router.push('/');
-    // } catch (error) {
-    //   console.error('Hubo un error al crear el usuario ', error.message);
-    //   guardarError(error.message);
-    // }
-      console.log('funciono todo perfecto')
-  }
-
-
-  
   return (
+    
     <>
       <Layout>
       <>
@@ -48,7 +56,7 @@ const CreateAccount = () => {
             `}
           >Crear Cuenta</h1>
           <Form
-            onSubmit={handleSubmit}
+            onSubmit={submitHandler}
             noValidate
           >
               <Field>
@@ -58,13 +66,12 @@ const CreateAccount = () => {
                       id="name"
                       placeholder="Tu Nombre"
                       name="name"
-                      value={name}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
+                      //value={name}
+                      //onChange={handleChange}
+                      //onBlur={handleBlur}
                   />
               </Field>
 
-              {errors.name && <Error>{errors.name}</Error> }
   
               <Field>
                   <label htmlFor="email">Email</label>
@@ -74,11 +81,10 @@ const CreateAccount = () => {
                       placeholder="Tu Email"
                       name="email"
                       value={email}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
+                      onChange={(e) => setEmail(e.target.value)}
+                      //onBlur={handleBlur}
                   />
               </Field>
-              {errors.email && <Error>{errors.email}</Error> }
   
               <Field>
                   <label htmlFor="password">Password</label>
@@ -88,13 +94,10 @@ const CreateAccount = () => {
                       placeholder="Tu Password"
                       name="password"
                       value={password}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
+                      onChange={(e) => setPassword(e.target.value)}
+                      //onBlur={handleBlur}
                   />
               </Field>
-              {errors.password && <Error>{errors.password}</Error> }
-
-              {error && <Error>{error} </Error>}
   
               <InputSubmit 
                 type="submit"
@@ -104,7 +107,8 @@ const CreateAccount = () => {
         </>
       </Layout>
     </>
-  )
-}
+    
+  );
+};
 
-export default CreateAccount
+export default CreateAcount
