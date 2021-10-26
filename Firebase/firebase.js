@@ -16,10 +16,7 @@ import {
 import firebaseApp from './Config';
 
 
-const auth = getAuth(firebaseApp)
-   
-
-
+export const auth = getAuth(firebaseApp)
 
 
 class appfire {

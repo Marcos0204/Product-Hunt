@@ -28,7 +28,6 @@ const Login = () => {
     async function NewLogin() {
         try {
           const authUser= await Firebase.login(email, password)
-          console.log(authUser)
           router.push('/')
         } catch (error) {
           setError(true)
