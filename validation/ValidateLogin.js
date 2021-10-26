@@ -1,4 +1,4 @@
-export default function ValidateCreateAcount(values) {
+export default function ValidateLogin(values) {
 
     let errors = {};
 

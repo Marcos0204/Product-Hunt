@@ -8,11 +8,10 @@ import Firebase from '../Firebase/firebase';
 
 // validaciones
 import useValidation from '../hooks/useValidation';
-import validationCreateAcount from '../validation/ValidateCreateAcount'
+import ValidateLogin from '../validation/ValidateLogin';
 
 
 const initialState = {
-  name: '',
   email: '',
   password: ''
 }
@@ -21,23 +20,13 @@ const Login = () => {
 
   const [ error, setError] = useState(false);
 
-    const { values, errors, handleSubmit, handleChange, handleBlur } = useValidation(initialState, validationCreateAcount, crearCuenta);
+    const { values, errors, handleSubmit, handleChange, handleBlur } = useValidation(initialState, ValidateLogin, NewLogin);
 
-    const { name, email, password } = values;
+    const {  email, password } = values;
     const router = useRouter()
 
-    async function crearCuenta() {
-        try {
-          const res = await Firebase.register(name, email, password);
-          //console.log(res)
-          router.push('/');
-        } catch (error) {
-          setError(true)
-          setTimeout(() => {
-            setError(false)
-          }, 3000);
-          
-        }
+    async function NewLogin() {
+        console.log('iniciar sesion')
     }
 
   
