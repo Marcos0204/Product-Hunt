@@ -9,6 +9,7 @@ import {
     signInWithEmailAndPassword,
     signInWithRedirect,
     GoogleAuthProvider,
+    updateProfile
 
 } from 'firebase/auth';
 
@@ -23,9 +24,19 @@ const auth = getAuth(firebaseApp)
 
 class appfire {
     
-    async  register( email, password)  {
+    async  register( name, email, password)  {
     
         const res = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(auth.currentUser, {
+            displayName: name,
+          }).then(() => {
+            // Profile updated!
+            // ...
+            console.log('Nombre actualizado')
+          }).catch((error) => {
+            // An error occurred
+            // ...
+          });
         return res
     }
     

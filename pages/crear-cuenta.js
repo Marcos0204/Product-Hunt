@@ -27,7 +27,8 @@ const CreateAcount = () => {
     const router = useRouter()
 
     async function crearCuenta() {
-        const res = await Firebase.register(email, password);
+        const res = await Firebase.register(name, email, password);
+        console.log(res)
         router.push('/');
     }
 
