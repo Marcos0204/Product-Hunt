@@ -40,10 +40,12 @@ class appfire {
     }
     
 
-    // // Inicia sesión del usuario
-    // async login(email, password) {
-    //     return this.auth.signInWithEmailAndPassword(email, password);
-    // }
+    // Inicia sesión del usuario
+    async login(email, password) {
+        const res = await signInWithEmailAndPassword(auth, email, password);
+        return res
+        //console.log(user)
+    }
 
     // // Cierra la sesión del usuario
     // async cerrarSesion() {

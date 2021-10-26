@@ -26,7 +26,16 @@ const Login = () => {
     const router = useRouter()
 
     async function NewLogin() {
-        console.log('iniciar sesion')
+        try {
+          const authUser= await Firebase.login(email, password)
+          console.log(authUser)
+          router.push('/')
+        } catch (error) {
+          setError(true)
+          setTimeout(() => {
+            setError(false)
+          }, 3000);
+        }
     }
 
   
@@ -72,7 +81,7 @@ const Login = () => {
               </Field>
               {errors.password && <Error>{errors.password}</Error> }
 
-              {error && <Error>Oops!... Este usuario ya esta en uso</Error>}
+              {error && <Error>Oops!... Hubo un error al autentificar el usuario</Error>}
   
               <InputSubmit 
                 type="submit"

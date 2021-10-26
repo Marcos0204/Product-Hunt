@@ -30,7 +30,7 @@ const CreateAcount = () => {
         try {
           const res = await Firebase.register(name, email, password);
           //console.log(res)
-          router.push('/');
+          router.push('/login');
         } catch (error) {
           setError(true)
           setTimeout(() => {
