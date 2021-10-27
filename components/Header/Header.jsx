@@ -43,9 +43,9 @@ const Header = () => {
     const { Firebase, user } = useContext(FirebaseContext);
     const Router = useRouter();
     async function userSignOut() {
-        //Firebase.SignOut()
-        await signOut(auth)
-        Router.push('/login')
+        Firebase.SignOut()
+        //await signOut(auth)
+        //Router.push('/login')
     }
 
     return (
