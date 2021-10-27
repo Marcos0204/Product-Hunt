@@ -14,10 +14,13 @@ import {
 
 } from 'firebase/auth';
 
+import { getFirestore, updateDoc, doc,  addDoc, collection } from 'firebase/firestore';
+
 import firebaseApp from './Config';
 
 
-export const auth = getAuth(firebaseApp)
+export const auth = getAuth(firebaseApp);
+const firestore = getFirestore(firebaseApp);
 
 
 class appfire {
@@ -27,28 +30,34 @@ class appfire {
         const res = await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(auth.currentUser, {
             displayName: name,
-           })//.then(() => {
-        //     // Profile updated!
-        //     // ...
-        //   }).catch((error) => {
-        //     // An error occurred
-        //     // ...
-        //   });
+           })
         return res
     }
     
-
     // Inicia sesión del usuario
     async login(email, password) {
         const res = await signInWithEmailAndPassword(auth, email, password);
         return res
         //console.log(user)
     }
-
     // Cierra la sesión del usuario
     async SignOut() {
         await signOut(auth);
     }
+
+
+    ///crear producto en la DB
+    async createPruduct( producto) {
+        
+        try {
+            const docRef = await addDoc(collection(firestore, "products"), producto);
+          
+            console.log("Document written with ID: ", docRef.id);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
+    }
+
 }
 const Firebase = new appfire()
 export default Firebase;
