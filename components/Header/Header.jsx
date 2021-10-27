@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router'
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import Search from '../ui/Search/Search';
 import Navagation from '../Navegation/Navagation';
 import Button from '../ui/Button/Button';
+
+//import context
+import { FirebaseContext } from '../../Firebase'
+import { auth } from '../../Firebase/firebase'
+import { signOut } from 'firebase/auth'
+import { async } from '@firebase/util';
 
 ///styles components
 
@@ -33,7 +40,13 @@ const Logo = styled.a`
 
 const Header = () => {
 
-    const user = false;
+    const { Firebase, user } = useContext(FirebaseContext);
+    const Router = useRouter();
+    async function userSignOut() {
+        //Firebase.SignOut()
+        await signOut(auth)
+        Router.push('/login')
+    }
 
     return (
         <header
@@ -69,9 +82,14 @@ const Header = () => {
                                     margin-right: 2rem;
                                 `}
                             > 
-                                Hola : Marcos
+                                Hola : {user.displayName}
                             </p>
-                            <Button type='button'>Cerrar sesion</Button>
+                            <Button
+                                type='button'
+                                onClick={() => userSignOut()}
+                            >
+                                Cerrar sesion
+                            </Button>
                         </>
                         
                         ) : (

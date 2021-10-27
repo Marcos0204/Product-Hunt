@@ -10,8 +10,6 @@ const useAuthentication = () => {
         const suscribe = onAuthStateChanged(auth, (userAuth) =>{
                                             if(userAuth){
                                                 setUserAuthenticated(userAuth);
-                                                console.log('guardando la autentificacion')
-                                                
                                             } else {
                                                 setUserAuthenticated(null);
                                             }

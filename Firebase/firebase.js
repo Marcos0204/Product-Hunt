@@ -9,7 +9,8 @@ import {
     signInWithEmailAndPassword,
     signInWithRedirect,
     GoogleAuthProvider,
-    updateProfile
+    updateProfile,
+    signOut
 
 } from 'firebase/auth';
 
@@ -44,10 +45,10 @@ class appfire {
         //console.log(user)
     }
 
-    // // Cierra la sesión del usuario
-    // async cerrarSesion() {
-    //     await this.auth.signOut();
-    // }
+    // Cierra la sesión del usuario
+    async SignOut() {
+        await signOut(auth);
+    }
 }
 const Firebase = new appfire()
 export default Firebase;
