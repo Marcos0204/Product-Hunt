@@ -13,8 +13,10 @@ import validationCreateAcount from '../validation/ValidateCreateAcount'
 
 const initialState = {
   name: '',
-  email: '',
-  password: ''
+  company: '',
+  image: '',
+  url:'',
+  description:''
 }
 
 
@@ -24,20 +26,11 @@ const NewProduct = () =>  {
 
   const { values, errors, handleSubmit, handleChange, handleBlur } = useValidation(initialState, validationCreateAcount, crearCuenta);
 
-  const { name, email, password } = values;
+  const { name, company, image, url, description } = values;
   const router = useRouter()
 
   async function crearCuenta() {
-      try {
-        const res = await Firebase.register(name, email, password);
-        router.push('/login');
-      } catch (error) {
-        setError(true)
-        setTimeout(() => {
-          setError(false)
-        }, 3000);
-        
-      }
+    
   }
 
 
@@ -55,25 +48,87 @@ const NewProduct = () =>  {
             onSubmit={handleSubmit}
             noValidate
           >
-              <Field>
-                  <label htmlFor="nombre">Nombre</label>
-                  <input 
-                      type="text"
-                      id="name"
-                      placeholder="Tu Nombre"
-                      name="name"
-                      value={name}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                  />
-              </Field>
+            <fieldset>
+              <legend>Informacion General</legend>
+            
+                <Field>
+                    <label htmlFor="nombre">Nombre</label>
+                    <input 
+                        type="text"
+                        id="name"
+                        placeholder="Tu Nombre"
+                        name="name"
+                        value={name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                    />
+                </Field>
 
-              {errors.name && <Error>{errors.name}</Error> }
+                {errors.name && <Error>{errors.name}</Error> }
 
-  
+                <Field>
+                    <label htmlFor="company">Empresa</label>
+                    <input 
+                        type="text"
+                        id="company"
+                        placeholder="Nombre emprea o compañia"
+                        name="company"
+                        value={company}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                    />
+                </Field>
+
+                {errors.company && <Error>{errors.company}</Error> }
+
+                <Field>
+                    <label htmlFor="image">Imagen</label>
+                    <input 
+                        type="file"
+                        id="image"
+                        name="image"
+                        value={image}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                    />
+                </Field>
+
+                {errors.image && <Error>{errors.image}</Error> }
+
+                <Field>
+                    <label htmlFor="image">URL</label>
+                    <input 
+                        id="url"
+                        name="url"
+                        value={url}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                    />
+                </Field>
+
+                {errors.url && <Error>{errors.url}</Error> }
+              </fieldset>
+              {/** */}
+
+              <fieldset>
+                <legend>sobre tu producto</legend>
+                <Field>
+                    <label htmlFor="description">Descripcion</label>
+                    <textarea 
+                        id="description"
+                        name="description"
+                        value={description}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                    />
+                </Field>
+
+                {errors.description && <Error>{errors.description}</Error> }
+              </fieldset>
+
               <InputSubmit 
                 type="submit"
-                value="Crear Cuenta"
+                value="Crear Producto"
               />
           </Form>
         </>
