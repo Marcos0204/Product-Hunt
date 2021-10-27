@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useRouter } from 'next/router';
 import { css } from '@emotion/core';
 import Layout from '../components/Layout/Layout';
 import { Form, Field, InputSubmit,  Error } from '../components/ui/Form/Form';
 
-import Firebase from '../Firebase/firebase';
+import { FirebaseContext } from '../Firebase';
 
 // validaciones
 import useValidation from '../hooks/useValidation';
@@ -24,13 +24,32 @@ const NewProduct = () =>  {
 
   const [ error, setError] = useState(false);
 
-  const { values, errors, handleSubmit, handleChange, handleBlur } = useValidation(initialState, ValidateCreateProduct, crearCuenta);
+  const { values, errors, handleSubmit, handleChange, handleBlur } = useValidation(initialState, ValidateCreateProduct, createProduct);
 
   const { name, company, image, url, description } = values;
   const router = useRouter()
+  
+  const { user, Firebase } = useContext(FirebaseContext)
 
-  async function crearCuenta() {
+
+
+  async function createProduct() {
     
+    if(!user){
+      return router.push('/login')
+    };
+
+    const product = {
+      name,
+      company,
+      url,
+      description,
+      votes:'',
+      comments:'',
+      create: Date.now(),
+      uid: user.uid
+    }
+    Firebase.createPruduct(product);
   }
 
 
