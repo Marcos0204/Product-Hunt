@@ -61,3 +61,22 @@ export const Error = styled.p`
     text-transform: uppercase;
     margin: 2rem 0;
 `;
+
+
+
+export const Button = styled.button`
+    background-color: blue;
+    width: 100%;
+    padding: 1.5rem;
+    text-align: center;
+    color: #FFF;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    border: none;
+    font-family: 'PT Sans', sans-serif;
+    font-weight: 700;
+
+    &:hover {
+        cursor: pointer;
+    }
+`;
